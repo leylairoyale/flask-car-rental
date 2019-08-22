@@ -14,8 +14,9 @@ def get_newsletter():
     last_name = form.last_name.data
     email = form.email.data
     newsing = Newsletter(first_name, last_name, email)
-    db.session.add(newsing)
-    db.session.commit()
+    if form.validate_on_submit:
+        db.session.add(newsing)
+        db.session.commit()
     return render_template("newsletter.html")
 
 @app.route("/contact", methods=["GET", "POST"])
